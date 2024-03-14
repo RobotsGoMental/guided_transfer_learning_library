@@ -1,0 +1,2 @@
+torch==2.2.0 ; python_version >= "3.9" and python_version < "4.0"
+matplotlib==3.8.3 ; python_version >= "3.9" and python_version < "4.0"

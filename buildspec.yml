@@ -1,0 +1,34 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.12
+  pre_build:
+    commands:
+      - apt-get install -y python3-venv
+      - python3.12 -m venv test_venv
+      - . test_venv/bin/activate
+      - pip install --upgrade pip
+      - pip install -r requirements.txt
+      - pip install -r tests/requirements.txt
+      - mkdir test-reports
+  build:
+    commands:
+      - coverage run -m unittest discover -s tests -p "test_*.py"
+      - coverage xml -o test-reports/coverage.xml
+      - coverage html -d test-reports/coverage
+  post_build:
+    commands:
+      - echo Build completed on `date`
+
+reports:
+  coverage:
+    files:
+      - 'test-reports/coverage.xml'
+    file-format: 'Cobertura'
+  report:
+    files:
+      - 'test-reports/coverage/index.html'
+    file-format: 'HTML'
+    base-directory: 'test-reports/coverage'

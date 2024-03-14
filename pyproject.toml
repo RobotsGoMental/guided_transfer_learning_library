@@ -1,0 +1,21 @@
+[dependencies]
+torch = "2.2.0"
+matplotlib = "3.8.3"
+
+[project]
+name = "guided-transfer-learning"
+version = "0.1.0"
+authors = [{name ="Vjekoslav Nikolic", email = "vjeko@robotsgomental.com"}]
+description = "Guided transfer learning for image classification"
+license = {file = "LICENSE"}
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
