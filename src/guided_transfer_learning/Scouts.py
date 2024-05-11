@@ -6,7 +6,7 @@ from guided_transfer_learning import GuidanceMatrix
 
 SCOUT_FILE_PREFIX = "gtl_scout"
 DEFAULT_RAW_GUIDANCE_PATH = "raw_guidance_matrix.pt"
-DEFAULT_MODEL_DIR = "models"
+DEFAULT_MODEL_DIR = "."
 
 
 class Scouts:

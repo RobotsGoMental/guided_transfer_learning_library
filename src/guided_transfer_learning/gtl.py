@@ -10,7 +10,7 @@ from guided_transfer_learning import (
     GuidanceMatrix,
 )
 
-MODELS_DIR = "models"
+MODELS_DIR = "."
 
 
 def list_params(model: torch.nn.Module) -> List[tuple[str, torch.Size]]:

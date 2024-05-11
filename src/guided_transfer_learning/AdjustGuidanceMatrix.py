@@ -60,7 +60,7 @@ class AdjustGuidanceMatrix:
         temperature (Temp | str): The temperature to be used for adjustment. Default is Temp.ROOM.
         slope (float): The slope value for adjustment. If not provided, no adjustment will be applied.
         intercept (float): The intercept value for adjustment. If not provided, no adjustment will be applied.
-        should_save_guidance (bool): Whether or not to save the adjusted guidance. Default is True.
+        should_save_guidance (bool): Whether or not to save the adjusted guidance. Default is False.
 
     Example usage:
     ```python
@@ -77,7 +77,7 @@ class AdjustGuidanceMatrix:
         temperature: Temp | str = Temp.ROOM,
         slope: float = None,
         intercept: float = None,
-        should_save_guidance: bool = True,
+        should_save_guidance: bool = False,
     ):
         self.guidance_matrix = guidance_matrix
         self.focus = self.__interpret_enum(Focus, focus)
@@ -106,9 +106,9 @@ class AdjustGuidanceMatrix:
         enum_class: Focus | Temp, enum_key: str | Focus | Temp
     ) -> Focus | Temp:
         if isinstance(enum_key, str):
-            if enum_key in enum_class:
+            try:
                 return enum_class[enum_key.upper()]
-            else:
+            except KeyError:
                 name = "focus" if enum_class == Focus else "temperature"
                 raise ValueError(f"Unknown {name}: {enum_key}.")
         return enum_key
@@ -299,7 +299,7 @@ class AdjustGuidanceMatrix:
 
         This method applies focus and temperature to the guidance matrix by calling the `apply_focus` and
         `apply_temperature` methods. If the flag `should_save_guidance` is set to `True`, the guidance matrix is saved
-        to the file 'models/guidance_matrix.pt' using the torch.save() function.
+        to the file 'guidance_matrix.pt' using the torch.save() function.
 
         Returns:
             The guidance matrix after applying focus and temperature.
@@ -307,5 +307,5 @@ class AdjustGuidanceMatrix:
         self.apply_focus()
         self.apply_temperature()
         if self.should_save_guidance:
-            torch.save(self.guidance_matrix, "models/guidance_matrix.pt")
+            torch.save(self.guidance_matrix, "guidance_matrix.pt")
         return self.guidance_matrix
