@@ -139,7 +139,7 @@ def plot_guidance_distribution(
 
     names = guidance_matrix.keys() if name is None else [name]
     for current_name in names:
-        plot(guidance_matrix[current_name], current_name)
+        plot(guidance_matrix[current_name].to_dense(), current_name)
 
 
 def adjust_guidance_matrix(
@@ -239,3 +239,13 @@ def _create_scout_data(
     return [
         torch.stack([features_or_labels[i] for i in index]) for index in scout_indexes
     ]
+
+
+def to_sparse(guidance_matrix, threshold=0.1):
+    small_to_zero = torch.nn.Threshold(threshold, 0.)
+    g_m = {}
+    for name in guidance_matrix:
+        guidance_matrix[name] = small_to_zero(guidance_matrix[name])
+        sparsed = guidance_matrix[name].to_sparse_coo()
+        g_m[name] = sparsed
+    return g_m

@@ -12,6 +12,7 @@ from .gtl import (
     scale_guidance_matrix,
     c,
     expand_scout_indexes,
+    to_sparse
 )
 from .file_utils import save_base, load_base, save_guidance_matrix, load_guidance_matrix
 
@@ -36,4 +37,5 @@ __all__ = [
     "scale_guidance_matrix",
     "c",
     "expand_scout_indexes",
+    "to_sparse"
 ]
