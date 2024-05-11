@@ -245,7 +245,7 @@ def to_sparse(guidance_matrix, threshold=0.1):
     small_to_zero = torch.nn.Threshold(threshold, 0.)
     g_m = {}
     for name in guidance_matrix:
-        guidance_matrix[name] = small_to_zero(guidance_matrix[name])
-        sparsed = guidance_matrix[name].to_sparse_coo()
+        sparsed = small_to_zero(guidance_matrix[name])
+        sparsed = sparsed.to_sparse_coo()
         g_m[name] = sparsed
     return g_m
